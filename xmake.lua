@@ -2,10 +2,12 @@ add_rules("mode.debug", "mode.release")
 
 target("extc")
     set_kind("shared")
+    add_includedirs("include")
     add_files("src/*.c")
 
 target("extc-static")
     set_kind("static")
+    add_includedirs("include")
     add_files("src/*.c")
 
 --target("extc")
