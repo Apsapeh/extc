@@ -15,10 +15,22 @@ vector_template_impl(i32, i32)
 int main() {
     // Инициализирует вектор
     vec_i32 a = vec_i32_init();
+    printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
+    vec_i32_reserve(&a, 268435456);
+    printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
+    //vec_i32_clean(&a);
     // Добавляем элемент
-    vec_i32_push_back(&a, 45);
+    {
+        i32 i;
+        for(i = 0; i < 26800; ++i) {
+            vec_i32_push_back(&a, i * 15); 
+            printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
+        }
+    }
+    printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
     // Выводим элемнт
     printf("%d\n", a.data[0]);
     // Очищаем вектор, иначе будет утечка памяти 
+    while(1) {}
     vec_i32_free(&a);
 }

@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "extc_rint.h"
 
 #define vector_template_def(name, type)\
@@ -8,8 +9,10 @@
     } vec_##name;\
 \
     vec_##name vec_##name##_init();\
+    void vec_##name##_reserve(vec_##name * v, size n);\
     void vec_##name##_push_back(vec_##name * v, type o);\
-    void vec_##name##_free(vec_##name * v);
+    void vec_##name##_free(vec_##name * v);\
+    void vec_##name##_clean(vec_##name * v);
 
 
 
@@ -22,11 +25,25 @@
         return res;\
     };\
     \
+    void vec_##name##_reserve(vec_##name * v, size n){\
+        if (v->capacity >= n) return;\
+        v->data = realloc(v->data, n * sizeof(type));\
+        v->capacity = n;\
+    }\
+    \
     void vec_##name##_push_back(vec_##name * v, type o) {\
-        v->data = realloc(v->data, (v->size+1) * sizeof(type));\
+        if(v->capacity < v->size+1) \
+            vec_##name##_reserve(v, v->size+1);\
         v->data[v->size] = o;\
+        ++v->size;\
     };\
     \
     void vec_##name##_free(vec_##name * v) {\
+        v->size = 0;\
+        v->capacity = 0;\
         free(v->data);\
+    }\
+    void vec_##name##_clean(vec_##name * v) {\
+        vec_##name##_free(v);\
+        v->data = malloc(0);\
     }
