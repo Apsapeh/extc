@@ -1,4 +1,4 @@
-// Define Rust-like type names
+/* Define Rust-like type names */
 
 typedef char  i8;
 typedef short i16;

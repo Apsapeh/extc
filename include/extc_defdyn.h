@@ -1,4 +1,4 @@
-// Define attrib for cross lib
+/* Define attrib for cross lib */
 
 #ifndef __EXTC_DEFDYN
 #define __EXTC_DEFDYN
