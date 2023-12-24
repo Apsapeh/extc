@@ -24,6 +24,7 @@ int main() {
         }
             printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
     }
+    vec_i32_clean(&a);
     printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
     printf("%d\n", a.data[0]);
     while(1) {}
