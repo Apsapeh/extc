@@ -19,10 +19,10 @@ int main() {
     printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
     {
         i32 i;
-        for(i = 0; i < 26800; ++i) {
-            vec_i32_push_back(&a, i * 15); 
-            printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
+        for(i = 0; i < 268435456; ++i) {
+            vec_i32_push_back(&a, i); 
         }
+            printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
     }
     printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
     printf("%d\n", a.data[0]);
