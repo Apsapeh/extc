@@ -15,18 +15,44 @@ vector_template_impl(i32, i32)
 int main() {
     vec_i32 a = vec_i32_init();
     printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
-    vec_i32_reserve(&a, 268435456);
-    printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
+    vec_i32_push_back(&a, 1);
+    vec_i32_push_back(&a, 2);
+    vec_i32_push_back(&a, 3);
+
+    vec_i32 b = vec_i32_init();
+    vec_i32_push_back(&b, 4);
+    vec_i32_push_back(&b, 5);
+    vec_i32_push_back(&b, 6);
+    vec_i32_push_back(&b, 7);
+    vec_i32_push_back(&b, 8);
+    vec_i32_push_back(&b, 9);
+    vec_i32_push_back(&b, 10);
+    /*vec_i32_erase(&b, 2);
+    vec_i32_erase(&b, 4);*/
+    vec_i32_erase_range(&b, 2, 3);
+    vec_i32_shrink_to_fit(&b);
+
     {
-        i32 i;
-        for(i = 0; i < 268435456; ++i) {
-            vec_i32_push_back(&a, i); 
+        int i;
+        for (i = 0; i < b.size; ++i) {
+            printf("b[%d] - %d\n", i, b.data[i]);
         }
-            printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
     }
-    vec_i32_clean(&a);
+    printf("Size: %d\nCapacity: %d\n", b.size, b.capacity);
+
+
+    
+
+    printf("%d\n", vec_i32_pop_back(&b));
+    printf("%d\n", vec_i32_pop_back(&b));
+    printf("Size: %d\nCapacity: %d\n", b.size, b.capacity);
+
+
+    vec_i32_append(&a, &b);
     printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
-    printf("%d\n", a.data[0]);
-    while(1) {}
-    vec_i32_free(&a);
+    
+    int i;
+    for (i = 0; i < a.size; ++i) {
+        printf("a[%d] - %d\n", i, a.data[i]);
+    }
 }
