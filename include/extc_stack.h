@@ -24,8 +24,8 @@
         res.capacity = _size;\
         res.data = (type*)malloc(sizeof(type)*_size);\
         if ((void*)result != NULL) {\
-            if ((void*)res.data = NULL) *result = 0;\
-            else *result = 1;\
+            if ((void*)res.data == NULL) *result = 1;\
+            else *result = 0;\
         }\
         return res;\
     }\
