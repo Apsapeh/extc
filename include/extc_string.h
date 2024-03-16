@@ -14,7 +14,7 @@ string string_from(const i8* str);
 string string_from_n(const i8* str, usize n);
 string stings_concat(string* self, string* vstr);
 string string_concat_str(string* self, const i8* str);
-string string_free();
+void string_free(string* self);
 
 #define string_template_impl() \
     vector_template_impl(__char, i8);
@@ -41,4 +41,11 @@ string string_free();
         r.size = r.cstr_vec.size;\
         r.str = r.cstr_vec.data;\
         return r;\
-    }
+    }\
+    \
+    void string_free(string* self) {\
+        vec___char_free(&self->cstr_vec);\
+        self->size = 0;\
+        self->str = NULL;\
+    }\
+    
