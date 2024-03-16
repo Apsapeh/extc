@@ -3,6 +3,14 @@ add_rules("mode.debug", "mode.release")
 option("build_examples")
 option_end()
 
+function example_template(files) 
+    set_enabled(has_config("build_examples") == true)
+    set_languages("c89")
+    add_deps("extc-static")
+    add_includedirs("include")
+    add_files(files)
+end
+
 target("extc")
     set_kind("shared")
     set_languages("c89")
@@ -16,19 +24,13 @@ target("extc-static")
     add_files("src/*.c")
 
 
-if not has_config("not_build_examples") then
+
 
 target("vec_example")
-    set_enabled(has_config("build_examples") == true)
-    set_languages("c89")
-    add_deps("extc-static")
-    add_includedirs("include")
-    add_files("examples/example_vec.c")
+    example_template("examples/example_vec.c")
 
 target("stack_example")
-    set_enabled(has_config("build_examples") == true)
-    set_languages("c89")
-    add_deps("extc-static")
-    add_includedirs("include")
-    add_files("examples/example_stack.c")
-end
+    example_template("examples/example_stack.c")
+
+target("string_example")
+    example_template("examples/example_string.c")
