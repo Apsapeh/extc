@@ -87,6 +87,7 @@
         v->size = 0;\
         v->capacity = 0;\
         free(v->data);\
+        v = NULL;\
     }\
     void vec_##name##_clean(vec_##name * v) {\
         vec_##name##_free(v);\
