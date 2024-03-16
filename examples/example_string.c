@@ -10,6 +10,7 @@ string_template_impl()
 int main() {
     string str = string_from("Text line 1\n");
     printf("%s", str.str);
+    printf("%lu %lu\n", str.size, str.cstr_vec.size);
 
     string str2 = string_from("Text line 2\n");
 }

@@ -22,6 +22,7 @@ void string_free(string* self);
         string r;\
         r.size = 0;\
         r.cstr_vec = vec___char_init();\
+        vec___char_push_back(&r.cstr_vec, '\0');\
         r.str = r.cstr_vec.data;\
         return r;
     }\
@@ -33,9 +34,9 @@ void string_free(string* self);
         string r;\
         r.cstr_vec = vec___char_init();\
         vec___char_append_data(&r.cstr_vec, str, n);\
-        if (r.str[r.size-1] != '\0')\
-            vec___char_push_back(r.str, '\0');\
-        r.size = r.cstr_vec.size;\
+        if (r.cstr_vec.data[r.cstr_vec.size-1] != '\0')\
+            vec___char_push_back(&r.cstr_vec, '\0');\
+        r.size = r.cstr_vec.size-1;\
         r.str = r.cstr_vec.data;\
         return r;\
     }\
