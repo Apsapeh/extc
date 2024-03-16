@@ -12,5 +12,8 @@ int main() {
     printf("%s", str.str);
     printf("%lu %lu\n", str.size, str.cstr_vec.size);
 
+    string_erase(&str, 4);
+    printf("%s", str.str);
+
     string str2 = string_from("Text line 2\n");
 }

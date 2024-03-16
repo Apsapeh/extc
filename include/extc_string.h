@@ -14,6 +14,7 @@ string string_from(const i8* str);
 string string_from_n(const i8* str, usize n);
 string stings_concat(string* self, string* vstr);
 string string_concat_str(string* self, const i8* str);
+u8 string_erase(string* self, usize index);
 void string_free(string* self);
 
 #define string_template_impl() \
@@ -30,6 +31,7 @@ void string_free(string* self);
     string string_from(const i8* str) {\
         return string_from_n(str, strlen(str));\
     }\
+    \
     string string_from_n(const i8* str, usize n) {\
         string r;\
         r.cstr_vec = vec___char_init();\
@@ -39,6 +41,13 @@ void string_free(string* self);
         r.size = r.cstr_vec.size-1;\
         r.str = r.cstr_vec.data;\
         return r;\
+    }\
+    \
+    u8 string_erase(string* self, usize index) {\
+        if (index >= self->size) return false;\
+        vec___char_erase(&self->cstr_vec, index);\
+        self->size = self->cstr_vec.size-1;\
+        return true;\
     }\
     \
     void string_free(string* self) {\
