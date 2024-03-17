@@ -11,6 +11,7 @@
 \
     vec_##name vec_##name##_init();\
     u8 vec_##name##_reserve(vec_##name * v, usize n);\
+    u8 vec_##name##_insert(vec_##name * v, usize n, type o);\
     u8 vec_##name##_push_back(vec_##name * v, type o);\
     u8 vec_##name##_append(vec_##name * v, vec_##name * v2);\
     u8 vec_##name##_append_data(vec_##name * v, type* d, usize n);\
@@ -38,6 +39,15 @@
         if ((void*)new_data == NULL) return false;\
         v->data = new_data;\
         v->capacity = n;\
+        return true;\
+    }\
+    \
+    u8 vec_##name##_insert(vec_##name * v, usize index, type o) {\
+        if(v->capacity < v->size+1) \
+            if (!vec_##name##_reserve(v, v->size+1)) return false;\
+        memmove(v->data+index+1, v->data+index, (v->size-index)*sizeof(type));\
+        v->data[index] = o;\
+        ++v->size;\
         return true;\
     }\
     \

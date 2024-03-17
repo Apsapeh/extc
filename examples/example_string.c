@@ -14,6 +14,9 @@ int main() {
 
     string_erase(&str, 4);
     printf("%s", str.str);
+    string_insert(&str, 4, '$');
+    printf("%s", str.str);
+
 
     string str2 = string_from("Text line 2\n");
 }

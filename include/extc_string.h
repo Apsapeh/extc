@@ -14,6 +14,7 @@ string string_from(const i8* str);
 string string_from_n(const i8* str, usize n);
 string stings_concat(string* self, string* vstr);
 string string_concat_str(string* self, const i8* str);
+u8 string_insert(string* self, usize index, i8 c);
 u8 string_erase(string* self, usize index);
 void string_free(string* self);
 
@@ -41,6 +42,13 @@ void string_free(string* self);
         r.size = r.cstr_vec.size-1;\
         r.str = r.cstr_vec.data;\
         return r;\
+    }\
+    \
+    u8 string_insert(string* self, usize index, i8 c) {\
+        if (index > self->size) return false;\
+        vec___char_insert(&self->cstr_vec, index, c);\
+        self->size = self->cstr_vec.size-1;\
+        return true;\
     }\
     \
     u8 string_erase(string* self, usize index) {\
