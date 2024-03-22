@@ -35,7 +35,7 @@ unsigned char string_erase_range(string* self, unsigned long index, unsigned lon
 
 void string_strip(string* self);
 void string_replace(string* self, const char* pat, const char* rep);
-vec_string string_split(string* self, const char* pat);
+vec_string string_split(string* self, const char* pat, unsigned char skip_empty_lines);
 
 void string_free(string* self);
 void free_vec_string(vec_string* vec);
@@ -96,13 +96,17 @@ void free_vec_string(vec_string* vec);
         return true;
     }
     \
-    vec_string string_split(string* str, const char* pat) {\
+    vec_string string_split(string* str, const char* pat, unsigned char skip_empty_lines) {\
         vec_string lines = vec_string_init();\
         unsigned long pat_len = STRING_STRLEN(pat);\
         unsigned long i;\
         unsigned long last = 0;\
         for (i=0; i<str->size; ++i) {\
             if (STRING_STRNCMP(str->str+i, pat, pat_len) == 0 || str->str[i+1] == '\0') {\
+                if (skip_empty_lines && i-last == 0) {\
+                    last = i+pat_len;\
+                    continue;\
+                }\
                 string line = string_from_n(str->str+last, i-last);\
                 vec_string_push_back(&lines, line);\
                 last = i+pat_len;\
