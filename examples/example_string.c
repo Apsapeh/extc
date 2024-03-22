@@ -18,7 +18,7 @@ int main() {
     printf("%s", str.str);
 
 
-    string str3 = string_from("repcatrepcatcatroeapracatreprep \n");
+    string str3 = string_from("repcatrepcatcatroeapracatreprep\n");
     string_replace(&str3, "rep", "***");
     printf("Rep str: %s", str3.str);
     vec_string split_str3 = string_split(&str3, "cat", true);

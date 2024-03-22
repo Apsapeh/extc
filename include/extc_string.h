@@ -101,9 +101,9 @@ void free_vec_string(vec_string* vec);
         unsigned long pat_len = STRING_STRLEN(pat);\
         unsigned long i;\
         unsigned long last = 0;\
-        for (i=0; i<str->size; ++i) {\
-            if (STRING_STRNCMP(str->str+i, pat, pat_len) == 0 || str->str[i+1] == '\0') {\
-                if (skip_empty_lines && i-last == 0) {\
+        for (i=0; i<str->cstr_vec.size; ++i) {\
+            if (STRING_STRNCMP(str->str+i, pat, pat_len) == 0 || str->str[i] == '\0') {\
+                if (skip_empty_lines && i == last) {\
                     last = i+pat_len;\
                     continue;\
                 }\
