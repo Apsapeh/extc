@@ -43,15 +43,15 @@ void free_vec_string(vec_string* vec);
 
 
 #define string_template_impl() \
-    vector_template_impl(__char, char);
-    vector_template_impl(string, string);\
+    vector_template_impl(__char, char) \
+    vector_template_impl(string, string) \
     string string_new() {\
         string r;\
         r.size = 0;\
         r.cstr_vec = vec___char_init();\
         vec___char_push_back(&r.cstr_vec, '\0');\
         r.str = r.cstr_vec.data;\
-        return r;
+        return r;\
     }\
     \
     string string_from(const char* str) {\
@@ -89,12 +89,12 @@ void free_vec_string(vec_string* vec);
         self->size = self->cstr_vec.size-1;\
         return true;\
     }\
-    unsigned char string_erase_range(string *self, unsigned long index, unsigned long count) {
-        if (index+count > self->size) return false;
-        vec___char_erase_range(&self->cstr_vec, index, count);
-        self->size = self->cstr_vec.size-1;
-        return true;
-    }
+    unsigned char string_erase_range(string *self, unsigned long index, unsigned long count) {\
+        if (index+count > self->size) return false;\
+        vec___char_erase_range(&self->cstr_vec, index, count);\
+        self->size = self->cstr_vec.size-1;\
+        return true;\
+    }\
     \
     vec_string string_split(string* str, const char* pat, unsigned char skip_empty_lines) {\
         vec_string lines = vec_string_init();\
@@ -153,7 +153,7 @@ void free_vec_string(vec_string* vec);
     }\
     \
     void free_vec_string(vec_string* vec) {\
-        unsigned long i;
+        unsigned long i;\
         for (i=0; i<vec->size; ++i)\
             string_free(&vec->data[i]);\
         vec_string_free(vec);\

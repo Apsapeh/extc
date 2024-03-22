@@ -122,4 +122,5 @@
     void vec_##name##_clean(vec_##name * v) {\
         vec_##name##_free(v);\
         v->data = (type*)VECTOR_MALLOC(0);\
-    }
+    }\
+    
