@@ -58,6 +58,7 @@
         v->capacity = 0;\
         free(v->data);\
     }\
+    \
     void stack_##name##_clean(stack_##name * v) {\
         stack_##name##_free(v);\
         v->data = (type*)malloc(0);\

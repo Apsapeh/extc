@@ -1,4 +1,5 @@
 #include <extc_vec.h>
+#include <extc_rint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,7 +15,7 @@ vector_template_impl(i32, i32)
 
 int main() {
     vec_i32 a = vec_i32_init();
-    printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
+    printf("Size: %lu\nCapacity: %lu\n", a.size, a.capacity);
     vec_i32_push_back(&a, 1);
     vec_i32_push_back(&a, 2);
     vec_i32_push_back(&a, 3);
@@ -38,18 +39,18 @@ int main() {
             printf("b[%d] - %d\n", i, b.data[i]);
         }
     }
-    printf("Size: %d\nCapacity: %d\n", b.size, b.capacity);
+    printf("Size: %lu\nCapacity: %lu\n", b.size, b.capacity);
 
 
     
 
     printf("%d\n", vec_i32_pop_back(&b));
     printf("%d\n", vec_i32_pop_back(&b));
-    printf("Size: %d\nCapacity: %d\n", b.size, b.capacity);
+    printf("Size: %lu\nCapacity: %lu\n", b.size, b.capacity);
 
 
     vec_i32_append(&a, &b);
-    printf("Size: %d\nCapacity: %d\n", a.size, a.capacity);
+    printf("Size: %lu\nCapacity: %lu\n", a.size, a.capacity);
     
     int i;
     for (i = 0; i < a.size; ++i) {
