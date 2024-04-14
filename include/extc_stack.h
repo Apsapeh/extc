@@ -14,6 +14,7 @@
     u8 stack_##name##_push(stack_##name * v, type o);\
     u8 stack_##name##_push_ptr(stack_##name * v, type* o, usize c);\
     type stack_##name##_pop(stack_##name * v);\
+    type* stack_##name##_pop_ptr(stack_##name * v, usize c);\
     void stack_##name##_free(stack_##name * v);\
     void stack_##name##_clean(stack_##name * v);
 
@@ -57,6 +58,10 @@
     \
     type stack_##name##_pop(stack_##name * v) {\
         return v->data[--v->size];\
+    }\
+    type* stack_##name##_pop_ptr(stack_##name * v, usize c) {\
+        v->size -= c;\
+        return &v->data[v->size];\
     }\
     \
     void stack_##name##_free(stack_##name * v) {\
