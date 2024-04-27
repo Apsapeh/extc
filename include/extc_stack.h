@@ -13,8 +13,8 @@
     u8 stack_##name##_realloc(stack_##name * v, usize n);\
     u8 stack_##name##_push(stack_##name * v, type o);\
     u8 stack_##name##_push_ptr(stack_##name * v, type* o, usize c);\
-    type stack_##name##_pop(stack_##name * v);\
-    type* stack_##name##_pop_ptr(stack_##name * v, usize c);\
+    u8 stack_##name##_pop(stack_##name * v, type* e);\
+    u8 stack_##name##_pop_ptr(stack_##name * v, usize c, type** e);\
     void stack_##name##_free(stack_##name * v);\
     void stack_##name##_clean(stack_##name * v);
 
@@ -50,18 +50,21 @@
     \
     u8 stack_##name##_push_ptr(stack_##name * v, type* o, usize c) {\
         if(v->capacity < v->size+c) return false;\
-        /*v->data[v->size++] = o;*/\
         memcpy(&v->data[v->size], o, sizeof(type)*c);\
         v->size += c;\
         return true;\
     }\
     \
-    type stack_##name##_pop(stack_##name * v) {\
-        return v->data[--v->size];\
+    u8 stack_##name##_pop(stack_##name * v, type* e) {\
+        if(v->size == 0) return false;\
+        if ((void*)e != NULL) *e = v->data[--v->size];\
+        return true;\
     }\
-    type* stack_##name##_pop_ptr(stack_##name * v, usize c) {\
+    u8 stack_##name##_pop_ptr(stack_##name * v, usize c, type** e) {\
+        if(v->size < c) return false;\
         v->size -= c;\
-        return &v->data[v->size];\
+        if ((void*)e != NULL) *e = &v->data[v->size];\
+        return true;\
     }\
     \
     void stack_##name##_free(stack_##name * v) {\
