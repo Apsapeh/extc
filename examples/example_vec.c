@@ -1,7 +1,7 @@
 #include <extc_vec.h>
 #include <extc_rint.h>
 #include <stdio.h>
-#include <stdlib.h>
+
 
 /* Создаем определения функций и структру
    Первый аргумент - имя вектора, второй - тип, коотрый он хранит
@@ -56,4 +56,5 @@ int main() {
     for (i = 0; i < a.size; ++i) {
         printf("a[%d] - %d\n", i, a.data[i]);
     }
+    return 0;
 }

@@ -1,3 +1,6 @@
+#ifndef EXTC_STRING_GUARD_H
+#define EXTC_STRING_GUARD_H
+
 #include "extc_vec.h"
 
 #ifndef STRING_NOSTD
@@ -10,7 +13,7 @@
 #define false 0
 
 
-vector_template_def(__char, char);
+vector_template_def(__char, char)
 
 
 typedef struct string {
@@ -23,7 +26,7 @@ typedef struct string {
 vector_template_def(string, string)
 
 
-string string_new();
+string string_new(void);
 string string_from(const char* str);
 string string_from_n(const char* str, unsigned long n);
 string stings_concat(string* self, string* vstr);
@@ -45,7 +48,7 @@ void free_vec_string(vec_string* vec);
 #define string_template_impl() \
     vector_template_impl(__char, char) \
     vector_template_impl(string, string) \
-    string string_new() {\
+    string string_new(void) {\
         string r;\
         r.size = 0;\
         r.cstr_vec = vec___char_init();\
@@ -101,13 +104,14 @@ void free_vec_string(vec_string* vec);
         unsigned long pat_len = STRING_STRLEN(pat);\
         unsigned long i;\
         unsigned long last = 0;\
+        string line;\
         for (i=0; i<str->cstr_vec.size; ++i) {\
             if (STRING_STRNCMP(str->str+i, pat, pat_len) == 0 || str->str[i] == '\0') {\
                 if (skip_empty_lines && i == last) {\
                     last = i+pat_len;\
                     continue;\
                 }\
-                string line = string_from_n(str->str+last, i-last);\
+                line = string_from_n(str->str+last, i-last);\
                 vec_string_push_back(&lines, line);\
                 last = i+pat_len;\
                 i += pat_len-1;\
@@ -157,4 +161,6 @@ void free_vec_string(vec_string* vec);
         for (i=0; i<vec->size; ++i)\
             string_free(&vec->data[i]);\
         vec_string_free(vec);\
-    }\
+    }
+    
+#endif 

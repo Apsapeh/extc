@@ -14,12 +14,14 @@ end
 target("extc")
     set_kind("shared")
     set_languages("c89")
+    set_warnings("pedantic")
     add_includedirs("include")
     add_files("src/*.c")
 
 target("extc-static")
-    set_languages("c89")
     set_kind("static")
+    set_languages("c89")
+    set_warnings("pedantic")
     add_includedirs("include")
     add_files("src/*.c")
 

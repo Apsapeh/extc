@@ -30,4 +30,5 @@ int main() {
 
 
     string str2 = string_from("Text line 2\n");
+    return 0;
 }
