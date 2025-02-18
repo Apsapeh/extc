@@ -13,14 +13,22 @@ vector_template_def(i32, i32)
    Этот макрос нужно использовать ТОЛЬКО В ИСХОДНИКАХ */
 vector_template_impl(i32, i32)
 
-int main() {
-    vec_i32 a = vec_i32_init();
+void vec_i32_free_func(i32* o) {
+    printf("Free %d\n", *o);
+}
+
+int main(void) {
+    vec_i32 a, b;
+    a = vec_i32_init();
+    vec_i32_set_free_func(&a, vec_i32_free_func);
+    printf("Vec i32 sizeof: %lu\n", sizeof(a));
     printf("Size: %lu\nCapacity: %lu\n", a.size, a.capacity);
     vec_i32_push_back(&a, 1);
     vec_i32_push_back(&a, 2);
     vec_i32_push_back(&a, 3);
 
-    vec_i32 b = vec_i32_init();
+    b = vec_i32_init();
+    vec_i32_set_free_func(&b, vec_i32_free_func);
     vec_i32_push_back(&b, 4);
     vec_i32_push_back(&b, 5);
     vec_i32_push_back(&b, 6);
@@ -52,9 +60,15 @@ int main() {
     vec_i32_append(&a, &b);
     printf("Size: %lu\nCapacity: %lu\n", a.size, a.capacity);
     
-    int i;
-    for (i = 0; i < a.size; ++i) {
-        printf("a[%d] - %d\n", i, a.data[i]);
+    {
+        unsigned long i;
+        for (i = 0; i < a.size; ++i) {
+            printf("a[%lu] - %d\n", i, a.data[i]);
+        }
     }
+
+    vec_i32_free(&a);
+    vec_i32_free(&b);
     return 0;
 }
+

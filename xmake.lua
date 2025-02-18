@@ -8,6 +8,10 @@ function example_template(files)
     set_languages("c89")
     add_deps("extc-static")
     add_includedirs("include")
+    set_warnings("pedantic")
+    set_strip("all")
+    set_optimize("fastest")
+    set_symbols("hidden")
     add_files(files)
 end
 
@@ -36,3 +40,6 @@ target("stack_example")
 
 target("string_example")
     example_template("examples/example_string.c")
+
+target("hash_map_example")
+    example_template("examples/example_hash_map.c")

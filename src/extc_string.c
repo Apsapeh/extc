@@ -1,3 +1,3 @@
 #include <extc_string.h>
 
-string_template_impl()
+string_impl()

@@ -5,9 +5,9 @@
 /* Создаем реализации функций
    Первый аргумент - имя вектора, второй - тип, коотрый он хранит
    Этот макрос нужно использовать ТОЛЬКО В ИСХОДНИКАХ */
-string_template_impl()
+string_impl()
 
-int main() {
+int main(void) {
     string str = string_from("Text line 1\n");
     printf("%s", str.str);
     printf("%lu %lu\n", str.size, str.cstr_vec.size);

@@ -45,7 +45,7 @@ void free_vec_string(vec_string* vec);
 
 
 
-#define string_template_impl() \
+#define string_impl() \
     vector_template_impl(__char, char) \
     vector_template_impl(string, string) \
     string string_new(void) {\
